@@ -11,7 +11,7 @@ import os
 from natsort import natsorted
 import random
 
-images_dir = 'batch3'
+images_dir = 'assets/batch3'
 save_dir1 = 'out/batch3.1' 
 save_dir2 = 'out/batch3.2'
 save_dir3 = 'out/batch3.3'
