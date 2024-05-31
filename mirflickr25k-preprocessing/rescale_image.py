@@ -1,18 +1,22 @@
 import cv2
+import numpy as np 
 import matplotlib.pyplot as plt
-import pandas as pd
+from PIL import Image,ImageOps
 from glob import glob
 import os
 
 from natsort import natsorted
+from annotate import annotate
 
-def rescale_image(image=None, images_dir=None, save_dir=None, x_size=400, y_size=400):
+def rescale_image(image=None, images_dir=None, save_dir=None, size=(400,400), limit=None):
     
     if image is not None:
         files_list = [image]
     elif images_dir is not None:
         files_list = natsorted(glob(os.path.join(images_dir, '*.jpg'))) # edits
         files_list = [path.replace('\\', '/') for path in files_list] # edits
+        if limit is not None:
+            files_list = files_list[limit[0]:limit[1]]
     else:
         print('Missing input image')
         return
@@ -21,14 +25,17 @@ def rescale_image(image=None, images_dir=None, save_dir=None, x_size=400, y_size
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
         for filename in files_list:
-
-            im = plt.imread(filename)
-
+            image = Image.open(filename).convert("RGB")
+            image = np.array(ImageOps.fit(image,size),dtype=np.float32)
+            image /= 255.
             save_name = filename.split('/')[-1].split('.')[0]
 
-            im = cv2.resize(im, (x_size, y_size), interpolation=cv2.INTER_LINEAR)
+            # Annotation RGB
+            # StegaStamp (192, 0, 64)
+            # Normal (64, 192, 128)
+            annotate(color=(64, 192, 128), size=size, save_name=save_name, save_dir='out/batch2/labels')
 
-            plt.imsave(save_dir + '/' + save_name + '.jpg', im)
+            plt.imsave(save_dir + '/' + save_name + '.jpg', image)
             print("Created " + save_dir + '/' + save_name + '.jpg')
 
     print("Rescale Finished")
