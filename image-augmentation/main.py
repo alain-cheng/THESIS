@@ -17,11 +17,15 @@ save_dir2 = 'assets/transformations/blur'
 save_dir3 = 'assets/transformations/color-shift'
 save_dir4 = 'assets/transformations/noise'
 save_dir5 = 'assets/transformations/jpeg-compressions'
-# batch3.1 - perspective warp (im1-1250)
-# batch3.2 - blur (im1251-2500)
-# batch3.3 - color shift (im2501-3750)
-# batch3.4 - noise (im3751-5000)
-# batch3.5 - jpeg compression (im5001-6250)
+
+# Images to be Augmented:
+    # perspective warp (im1-1250)
+    # blur (im1251-2500)
+    # color shift (im2501-3750)
+    # noise (im3751-5000)
+    # jpeg compression (im5001-6250)
+
+# TODO: Include annotations
 
 def main():
 
