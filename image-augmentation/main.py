@@ -11,12 +11,12 @@ import os
 from natsort import natsorted
 import random
 
-images_dir = 'assets/batch3'
-save_dir1 = 'out/batch3.1' 
-save_dir2 = 'out/batch3.2'
-save_dir3 = 'out/batch3.3'
-save_dir4 = 'out/batch3.4'
-save_dir5 = 'out/batch3.5'
+images_dir = 'assets/stegastamp-encoded'
+save_dir1 = 'assets/transformations/perspective-warp' 
+save_dir2 = 'assets/transformations/blur'
+save_dir3 = 'assets/transformations/color-shift'
+save_dir4 = 'assets/transformations/noise'
+save_dir5 = 'assets/transformations/jpeg-compressions'
 # batch3.1 - perspective warp (im1-1250)
 # batch3.2 - blur (im1251-2500)
 # batch3.3 - color shift (im2501-3750)

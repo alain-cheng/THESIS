@@ -1,11 +1,11 @@
 import os
 
 
-save_dir1 = 'out/batch3.1/labels'
-save_dir2 = 'out/batch3.2/labels'
-save_dir3 = 'out/batch3.3/labels'
-save_dir4 = 'out/batch3.4/labels'
-save_dir5 = 'out/batch3.5/labels'
+save_dir1 = 'assets/transformations/perspective-warp/labels'
+save_dir2 = 'assets/transformations/blur/labels'
+save_dir3 = 'assets/transformations/color-shift/labels'
+save_dir4 = 'assets/transformations/noise/labels'
+save_dir5 = 'assets/transformations/jpeg-compression/labels'
 
 label1 = "StegaStamp"
 label2 = "Normal"
