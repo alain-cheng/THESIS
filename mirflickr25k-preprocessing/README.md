@@ -16,6 +16,12 @@ Once the model has been downloaded, make sure the model is in the same directory
             ├── variables.data
             ├── variables.index
 
+## Dataset
+
+The MirFlickr dataset used in this project can be obtained from the following download [link](http://press.liacs.nl/mirflickr/mirflickr25k.v3b/mirflickr25k.zip):
+
+    http://press.liacs.nl/mirflickr/mirflickr25k.v3b/mirflickr25k.zip
+
 ## Installation
 
 The dependencies used in this project can be installed by running:
