@@ -1,16 +1,16 @@
-import bchlib # type: ignore
+import bchlib                                                   # type: ignore
 from glob import glob
 import os
-from PIL import Image,ImageOps # type: ignore
-import numpy as np # type: ignore
-import tensorflow as tf # type: ignore
-import tensorflow.contrib.image # type: ignore
-from tensorflow.python.saved_model import tag_constants # type: ignore
-from tensorflow.python.saved_model import signature_constants # type: ignore
+from PIL import Image,ImageOps                                  # type: ignore
+import numpy as np                                              # type: ignore
+import tensorflow as tf                                         # type: ignore
+import tensorflow.contrib.image                                 # type: ignore
+from tensorflow.python.saved_model import tag_constants         # type: ignore
+from tensorflow.python.saved_model import signature_constants   # type: ignore
 
 import random
 import string
-from natsort import natsorted
+from natsort import natsorted                                   # type: ignore
 from annotate import annotate
 
 BCH_POLYNOMIAL = 137
@@ -28,7 +28,7 @@ def encode_image(model, image=None, images_dir=None, save_dir=None, secret='1234
         files_list = [image]
     elif images_dir is not None:
         files_list = natsorted(glob(os.path.join(images_dir, '*.jpg'))) # edits
-        files_list = [path.replace('\\', '/') for path in files_list] # edits
+        files_list = [path.replace('\\', '/') for path in files_list]   # edits
         if limit is not None:
             files_list = files_list[limit[0]:limit[1]]
     else:
@@ -90,7 +90,6 @@ def encode_image(model, image=None, images_dir=None, save_dir=None, secret='1234
             rescaled = (hidden_img[0] * 255).astype(np.uint8)
             #raw_img = (image * 255).astype(np.uint8)
             #residual = residual[0]+.5
-
             #residual = (residual * 255).astype(np.uint8)
 
             save_name = filename.split('/')[-1].split('.')[0]

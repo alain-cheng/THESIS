@@ -1,12 +1,11 @@
-import cv2
-import numpy as np 
-import matplotlib.pyplot as plt
-from PIL import Image,ImageOps
-from glob import glob
+import numpy as np                  # type: ignore
+import matplotlib.pyplot as plt     # type: ignore
+from PIL import Image,ImageOps      # type: ignore
+from glob import glob               # type: ignore
+from natsort import natsorted       # type: ignore
+from annotate import annotate       # type: ignore
 import os
 
-from natsort import natsorted
-from annotate import annotate
 
 def rescale_image(image=None, images_dir=None, save_dir=None, size=(400,400), limit=None):
     
