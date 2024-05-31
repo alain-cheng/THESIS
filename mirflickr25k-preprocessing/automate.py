@@ -1,8 +1,7 @@
 from encode_image import encode_image
 from rescale_image import rescale_image
-from generate_labels import generate_labels
-from generate_labels2 import generate_labels2
-
+from generate_labels import generate_labels, generate_labels2
+from annotate import annotate
 
 
 model = 'saved_models/stegastamp_pretrained'
@@ -28,21 +27,25 @@ images_dir0_1 = 'mirflickr25k/mirflickr/batch1'
 images_dir0_2 = 'mirflickr25k/mirflickr/batch2'
 save_dir0 = 'out/batch0'
 
-## Dataset V1
+## Dataset V1.0: With text labels
+def v_1_0():
+    encode_image(model, None, images_dir1, save_dir1, secret)
+    rescale_image(images_dir=images_dir2, save_dir=save_dir2)
+    generate_labels(12500)
+    generate_labels2(6250)
 
-## Dataset V2: All transformed
 
-## Dataset V3: All
+## Dataset V1.1: With annotation labels
+def v_1_1():
+    pass
 
 def main():
-    #encode_image(model, None, images_dir1, save_dir1, secret)
-    #rescale_image(images_dir=images_dir2, save_dir=save_dir2)
-    #generate_labels(12500)
-    #generate_labels2(6250)
+    """
+    Uncomment the Dataset version to generate for the project
+    """
+    #v_1_0()
+    #v_1_1()
 
-    # V0
-    rescale_image(images_dir=images_dir0_1, save_dir=save_dir0)
-    rescale_image(images_dir=images_dir0_2, save_dir=save_dir0)
     pass
 
 if __name__ == "__main__":
