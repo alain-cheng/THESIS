@@ -12,9 +12,9 @@ Each method is implemented with an internal random variable to ensure data varia
 
 ### Examples
 
-<img src="../Images/transformed.png" alt=alt-text-01 width=500>
+![alt-text-01](../Images/transformed.png)
 
-<img src="../Images/noised.png" alt=alt-text-01 width=500>
+![alt-text-02](../Images/noised.png)
 
 ## Setup
 

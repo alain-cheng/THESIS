@@ -11,7 +11,7 @@ This project directory encodes and/or resizes images from the MirFlickr dataset 
 
 ### Examples
 
-<img src="../Images/encoded.png" alt=alt-text-01 width=1000>
+![alt-text-01](../Images/encoded.png)
 
 ## Dataset
 
