@@ -159,14 +159,15 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-image-augmentation/assets
-/mirflickr25k-preprocessing/saved_models/stegastamp_pretrained
-/mirflickr25k-preprocessing/stegastamp_pretrained/
+# /mirflickr25-preprocessing directory
 /mirflickr25k preprocessing
 /mirflickr25k-preprocessing/mirflickr25k
 /mirflickr25k-preprocessing/out
 
+# assets directory
 assets/mirflickr25k
 assets/saved_models
 assets/stegastamp-encoded
 assets/transformations
+assets/mirflickr25k-preprocessed-annotated
+assets/DIV2K_train_HR
