@@ -11,7 +11,7 @@ This project directory encodes and/or resizes images from the MirFlickr dataset 
 
 ### Examples
 
-![alt-text-01](../Images/encoded.png)
+![alt-text-01](/docs/Images/encoded.png)
 
 ## Dataset
 
@@ -23,13 +23,14 @@ The MirFlickr dataset used in this project can be obtained from the following do
 
 The StegaStamp encoder model used in this project can be downloaded from [here](https://drive.google.com/drive/folders/1EHvFEVXufdiaHM15wSAXcxFFzIgaMRFn?usp=drive_link).
 
-Once the model has been downloaded, make sure the model is in the same directory of this project and the model file is structured as follows:
+Once the model has been downloaded, make sure the model is in the root directory and the model file is structured as follows:
 
-    ├── saved_models
-        ├── saved_model.pb          
-        ├── variables
-            ├── variables.data
-            ├── variables.index
+    ├── assets
+        ├── saved_models
+            ├── saved_model.pb          
+            ├── variables
+                ├── variables.data
+                ├── variables.index
 
 ## Installation
 

@@ -100,7 +100,7 @@ def encode_image(model, image=None, images_dir=None, save_dir=None, secret='1234
             # Annotation RGB
             # StegaStamp (192, 0, 64)
             # Normal (64, 192, 128)
-            annotate(color=(192, 0, 64), size=size, save_name=save_name, save_dir='out/batch1/labels')
+            annotate(color=(192, 0, 64), size=size, save_name=save_name, save_dir='../assets/stegastamp-encoded/labels')
 
             #im = Image.fromarray(np.squeeze(np.array(residual)))
             #im.save(save_dir + '/residuals'+'/'+save_name+'.png') # edits

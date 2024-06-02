@@ -166,4 +166,7 @@ image-augmentation/assets
 /mirflickr25k-preprocessing/mirflickr25k
 /mirflickr25k-preprocessing/out
 
-/assets/
+assets/mirflickr25k
+assets/saved_models
+assets/stegastamp-encoded
+assets/transformations

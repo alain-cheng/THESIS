@@ -1,15 +1,12 @@
-import cv2
-import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
 
 def white_balance(im):
     avg = np.mean(im)
 
     # Randomize wb scaling
-    r = np.random.uniform(1.0, 1.5)
-    g = np.random.uniform(1.0, 1.5)
-    b = np.random.uniform(1.0, 1.5)
+    r = np.random.uniform(1.0, 2.0)
+    g = np.random.uniform(1.0, 2.0)
+    b = np.random.uniform(1.0, 2.0)
     scale = np.array([r,g,b])
 
     im_wb = im * scale

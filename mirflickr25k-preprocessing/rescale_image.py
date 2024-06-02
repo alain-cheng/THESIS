@@ -32,7 +32,7 @@ def rescale_image(image=None, images_dir=None, save_dir=None, size=(400,400), li
             # Annotation RGB
             # StegaStamp (192, 0, 64)
             # Normal (64, 192, 128)
-            annotate(color=(64, 192, 128), size=size, save_name=save_name, save_dir='out/batch2/labels')
+            annotate(color=(64, 192, 128), size=size, save_name=save_name, save_dir='../assets/stegastamp-encoded/labels')
 
             plt.imsave(save_dir + '/' + save_name + '.jpg', image)
             print("Created " + save_dir + '/' + save_name + '.jpg')

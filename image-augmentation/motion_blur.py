@@ -1,6 +1,4 @@
 import cv2
-import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
 
 def v_motion_blur(im):
