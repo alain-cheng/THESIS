@@ -20,7 +20,7 @@ Each method is implemented with an internal random variable to ensure data varia
 
 ### Dataset
 
-This project dir assumes that `../mirflickr25k-preprocessing` has been executed. The following dataset folder structure is expected before running this project: 
+This project dir assumes that `../mirflickr25k-preprocessing` has been executed. The following dataset folder structure on the root directory is expected before running this project: 
 
     ├── assets
         ├── stegastamp-encoded
