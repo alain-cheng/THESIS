@@ -30,6 +30,14 @@ label_save_dir4 = '../assets/transformations/noise/labels'
 im_save_dir5 = '../assets/transformations/jpeg-compressions'
 label_save_dir5 = '../assets/transformations/jpeg-compressions/labels'
 
+save_dirs = {
+    im_save_dir1: label_save_dir1,
+    im_save_dir2: label_save_dir2,
+    im_save_dir3: label_save_dir3,
+    im_save_dir4: label_save_dir4,
+    im_save_dir5: label_save_dir5
+}
+
 # Images to be Augmented:
     # perspective warp (im1-1250)
     # blur (im1251-2500)
@@ -39,26 +47,11 @@ label_save_dir5 = '../assets/transformations/jpeg-compressions/labels'
 
 def main():
 
-    if not os.path.exists(im_save_dir1):
-        os.makedirs(im_save_dir1)
-    if not os.path.exists(label_save_dir1):
-        os.makedirs(label_save_dir1)
-    if not os.path.exists(im_save_dir2):
-        os.makedirs(im_save_dir2)
-    if not os.path.exists(label_save_dir2):
-        os.makedirs(label_save_dir2)
-    if not os.path.exists(im_save_dir3):
-        os.makedirs(im_save_dir3)
-    if not os.path.exists(label_save_dir3):
-        os.makedirs(label_save_dir3)
-    if not os.path.exists(im_save_dir4):
-        os.makedirs(im_save_dir4)
-    if not os.path.exists(label_save_dir4):
-        os.makedirs(label_save_dir4)
-    if not os.path.exists(im_save_dir5):
-        os.makedirs(im_save_dir5)
-    if not os.path.exists(label_save_dir5):
-        os.makedirs(label_save_dir5)
+    for im_dir, lab_dir in save_dirs.items():
+        if not os.path.exists(im_dir):
+            os.makedirs(im_dir)
+        if not os.path.exists(lab_dir):
+            os.makedirs(lab_dir)
 
     im_files_list = natsorted(glob(os.path.join(images_dir, '*.jpg')))
     label_files_list = natsorted(glob(os.path.join(labels_dir, '*.jpg')))
