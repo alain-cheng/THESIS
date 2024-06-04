@@ -32,7 +32,7 @@ def main():
     lab_files_list = natsorted(glob(os.path.join(labels_dir, '*.jpg')))
     files_list = np.column_stack((ovl_files_list, lab_files_list))
 
-    for ovl_file, lab_file in files_list[1719:, :]: ###
+    for ovl_file, lab_file in files_list[:, :]: ###
 
         # Randomly pick a background
         bg_file = bg_files_list[np.random.randint(0, len(bg_files_list))]
