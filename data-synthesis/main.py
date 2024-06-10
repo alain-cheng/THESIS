@@ -32,7 +32,7 @@ def main():
     lab_files_list = natsorted(glob(os.path.join(labels_dir, '*.jpg')))
     files_list = np.column_stack((ovl_files_list, lab_files_list))
 
-    for ovl_file, lab_file in files_list[:, :]: ###
+    for ovl_file, lab_file in files_list[:, :]: ### ex. If it randomly stopped running at img6500.jpg, edit `files_list[6499:,:]` and run `python main.py` again
 
         # Randomly pick a background
         bg_file = bg_files_list[np.random.randint(0, len(bg_files_list))]
@@ -68,7 +68,7 @@ def main():
         b = np.random.randint(0, 255)
         bg = bg.rotate(randfloat, Image.Resampling.NEAREST, expand = False, fillcolor=(r,g,b)) # expand false so output img dimension is not affected
         overlay = overlay.rotate(randfloat2, expand = True)
-        bg_black = bg_black.rotate(randfloat, expand = True)
+        bg_black = bg_black.rotate(randfloat, expand = False)
         label = label.rotate(randfloat2, expand = True)
         
         if extra_flag == 0:
@@ -112,6 +112,10 @@ def main():
         lab_save_name = lab_file.split('/')[-1].split('.')[0].split('im')[-1].split('_')[0]
         im_save_name = 'im' + f'{int(im_save_name)}'
         lab_save_name = 'im' + f'{int(lab_save_name)}' + '_L'
+
+        # Resize all outputs
+        bg = bg.resize((1024, 1024), Image.Resampling.LANCZOS)
+        bg_black = bg_black.resize((1024, 1024), Image.Resampling.LANCZOS)
 
 # Save overlayed images
         bg.save(im_save_dir1 + '/' + im_save_name + '.jpg')
