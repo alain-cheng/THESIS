@@ -48,7 +48,7 @@ def main():
 
         ## Open images
         bg = Image.open(bg_file)
-        bg = bg.resize((2000, 2000), Image.Resampling.LANCZOS)
+        bg = bg.resize((1000, 1000), Image.Resampling.LANCZOS)
         bg_width, bg_height = bg.size
         overlay = Image.open(ovl_file).convert('RGBA')
         bg_black_s = Image.new('RGB', (bg_width, bg_height), (0, 0, 0))       # black bg is for label overlaying
@@ -98,21 +98,21 @@ def main():
 
         # Extra images go first if any
         if extra_flag == 0:
-            rand_x = np.random.randint(0, bg_width+1-200)
-            rand_y = np.random.randint(0, bg_height+1-200)
+            rand_x = np.random.randint(0, bg_width+1-400)
+            rand_y = np.random.randint(0, bg_height+1-400)
             randint = (rand_x, rand_y)
             bg.paste(extra_overlay, randint, mask=extra_overlay)
             bg_black_s.paste(extra_label, randint, mask=extra_label)
         
         if extra_extra_flag == 0:
-            rand_x = np.random.randint(0, bg_width+1-200)
-            rand_y = np.random.randint(0, bg_height+1-200)
+            rand_x = np.random.randint(0, bg_width+1-400)
+            rand_y = np.random.randint(0, bg_height+1-400)
             randint = (rand_x, rand_y)
             bg.paste(extra_extra_overlay, randint, mask=extra_extra_overlay)
             bg_black_n.paste(extra_extra_label, randint, mask=extra_extra_label)
 
-        rand_x = np.random.randint(0, bg_width+1-200)                       # Subtracting ~200 so the encoding doesnt go completely out-of-frame
-        rand_y = np.random.randint(0, bg_height+1-200)
+        rand_x = np.random.randint(0, bg_width+1-400)                       # Subtracting ~200 so the encoding doesnt go completely out-of-frame
+        rand_y = np.random.randint(0, bg_height+1-400)
         randint = (rand_x, rand_y)
         bg.paste(overlay, randint, mask=overlay)
         if flag == "StegaStamp":
@@ -132,18 +132,18 @@ def main():
         bg_black_n = bg_black_n.convert('L').point(fn, mode='1')
 
         # Resize all outputs
-        bg = bg.resize((1024, 1024), Image.Resampling.LANCZOS)
-        bg_black_s = bg_black_s.resize((1024, 1024), Image.Resampling.LANCZOS)
-        bg_black_n = bg_black_n.resize((1024, 1024), Image.Resampling.LANCZOS)
+        bg = bg.resize((800, 800), Image.Resampling.LANCZOS)
+        bg_black_s = bg_black_s.resize((800, 800), Image.Resampling.LANCZOS)
+        bg_black_n = bg_black_n.resize((800, 800), Image.Resampling.LANCZOS)
 
 # Save overlayed images
-        bg.save(im_save_dir1 + '/' + im_save_name + '.jpg')
+        bg.save(im_save_dir1 + '/' + im_save_name + '.png')
         if flag == "StegaStamp" or extra_flag == 0:
-            bg_black_s.save(lab_save_dir1 + '/' + lab_save_name + '_StegaStamp' + '.jpg')
-            print("Created " + lab_save_dir1 + '/' + lab_save_name + '_StegaStamp' + '.jpg')
+            bg_black_s.save(lab_save_dir1 + '/' + lab_save_name + '_StegaStamp' + '.png')
+            print("Created " + lab_save_dir1 + '/' + lab_save_name + '_StegaStamp' + '.png')
         if flag == "Normal" or extra_extra_flag == 0:
-            bg_black_n.save(lab_save_dir1 + '/' + lab_save_name + '_Normal' + '.jpg')
-            print("Created " + lab_save_dir1 + '/' + lab_save_name + '_Normal' + '.jpg')
+            bg_black_n.save(lab_save_dir1 + '/' + lab_save_name + '_Normal' + '.png')
+            print("Created " + lab_save_dir1 + '/' + lab_save_name + '_Normal' + '.png')
         print("Created " + im_save_dir1 + '/' + im_save_name + '.jpg')
 
         # Increment count
