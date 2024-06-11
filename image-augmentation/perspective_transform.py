@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def perspective_transform(im=None, label=None):
+def perspective_transform(im, label):
     """
     Input Params:
         im - image directory
@@ -13,19 +13,19 @@ def perspective_transform(im=None, label=None):
             label_warped - the warped image label
     """
 
-    # Randomize destination ranges
+    # Randomize destination ranges give or take 40px // 10% of 400
     #Top-Left
-    x1 = np.random.randint(0, 51)
-    y1 = np.random.randint(0, 51)
+    x1 = np.random.randint(0, 41)
+    y1 = np.random.randint(0, 41)
     #Top-Right
-    x2 = np.random.randint(350, 401)
-    y2 = np.random.randint(0, 51)
+    x2 = np.random.randint(360, 401)
+    y2 = np.random.randint(0, 41)
     #Bottom-Right
-    x3 = np.random.randint(350, 401)
-    y3 = np.random.randint(350, 401)
+    x3 = np.random.randint(360, 401)
+    y3 = np.random.randint(360, 401)
     #Bottom-Left
-    x4 = np.random.randint(0, 51)
-    y4 = np.random.randint(350, 401)
+    x4 = np.random.randint(0, 41)
+    y4 = np.random.randint(360, 401)
 
     # Perspective Warp 
     src = np.float32([[0,0], [400,0], [400,400], [0,400]])              # top-left, top-right, bottom-right, bottom-left

@@ -1,5 +1,8 @@
 import os
 
+#########################################
+## This function is no longer relevant ##
+#########################################
 
 save_dir1 = 'out/batch1/labels'
 save_dir2 = 'out/batch2/labels'
