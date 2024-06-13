@@ -165,12 +165,4 @@ cython_debug/
 /mirflickr25k-preprocessing/out
 
 # assets directory
-assets/mirflickr25k
-assets/saved_models
-assets/stegastamp-encoded
-assets/transformations
-assets/mirflickr25k-preprocessed-annotated
-assets/DIV2K_train_HR
-assets/synthesized
-assets/synthesized-v2
-assets/StegaStampV1
+assets/*
