@@ -8,8 +8,8 @@ import random
 
 
 backgrounds_dir = '../assets/DIV2K_train_HR'
-overlays_dir = '../assets/mirflickr25k-preprocessed-annotated'
-labels_dir = '../assets/mirflickr25k-preprocessed-annotated/labels'
+overlays_dir = '../assets/augmented'
+labels_dir = '../assets/augmented/labels'
 
 im_save_dir1 = '../assets/synthesized-v2'
 lab_save_dir1 = '../assets/synthesized-v2/labels'
@@ -29,7 +29,7 @@ def main():
 
     bg_files_list = natsorted(glob(os.path.join(backgrounds_dir, '*.png')))
     ovl_files_list = natsorted(glob(os.path.join(overlays_dir, '*.jpg')))
-    lab_files_list = natsorted(glob(os.path.join(labels_dir, '*.jpg')))
+    lab_files_list = natsorted(glob(os.path.join(labels_dir, '*.png')))
     files_list = np.column_stack((ovl_files_list, lab_files_list))
 
     count = 0
@@ -57,13 +57,13 @@ def main():
 
         extra_flag = np.random.randint(0, 11) % 2
         if extra_flag == 0:
-            extra_ovl_file, extra_lab_file = files_list[np.random.randint(25000, 26251), :] # 2nd image is guaranteed StegaStamp with transformation
+            extra_ovl_file, extra_lab_file = files_list[np.random.randint(0, 25000), :]
             extra_overlay = Image.open(extra_ovl_file).convert('RGBA')
             extra_label = Image.open(extra_lab_file).convert('RGBA')
         
         extra_extra_flag = random.choice([extra_flag, 0])
         if extra_extra_flag == 0:
-            extra_extra_ovl_file, extra_extra_lab_file = files_list[np.random.randint(12500, 25000), :] # 3rd image is guaranteed Normal image
+            extra_extra_ovl_file, extra_extra_lab_file = files_list[np.random.randint(0, 25000), :]
             extra_extra_overlay = Image.open(extra_extra_ovl_file).convert('RGBA')
             extra_extra_label = Image.open(extra_extra_lab_file).convert('RGBA')
 
@@ -111,7 +111,7 @@ def main():
             bg.paste(extra_extra_overlay, randint, mask=extra_extra_overlay)
             bg_black_n.paste(extra_extra_label, randint, mask=extra_extra_label)
 
-        rand_x = np.random.randint(0, bg_width+1-400)                       # Subtracting ~200 so the encoding doesnt go completely out-of-frame
+        rand_x = np.random.randint(0, bg_width+1-400)                       
         rand_y = np.random.randint(0, bg_height+1-400)
         randint = (rand_x, rand_y)
         bg.paste(overlay, randint, mask=overlay)

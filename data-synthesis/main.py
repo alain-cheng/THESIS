@@ -8,8 +8,8 @@ import random
 
 
 backgrounds_dir = '../assets/DIV2K_train_HR'
-overlays_dir = '../assets/mirflickr25k-preprocessed-annotated'
-labels_dir = '../assets/mirflickr25k-preprocessed-annotated/labels'
+overlays_dir = '../assets/augmented'
+labels_dir = '../assets/augmented/labels'
 
 im_save_dir1 = '../assets/synthesized'
 lab_save_dir1 = '../assets/synthesized/labels'
@@ -29,7 +29,7 @@ def main():
 
     bg_files_list = natsorted(glob(os.path.join(backgrounds_dir, '*.png')))
     ovl_files_list = natsorted(glob(os.path.join(overlays_dir, '*.jpg')))
-    lab_files_list = natsorted(glob(os.path.join(labels_dir, '*.jpg')))
+    lab_files_list = natsorted(glob(os.path.join(labels_dir, '*.png')))
     files_list = np.column_stack((ovl_files_list, lab_files_list))
 
     for ovl_file, lab_file in files_list[:, :]: ###
@@ -45,15 +45,17 @@ def main():
         bg_black = Image.new('RGB', (bg_width, bg_height), (0, 0, 0))       # black bg is for label overlaying
         label = Image.open(lab_file).convert('RGBA')
 
+        # Random chance of a 2nd image
         extra_flag = np.random.randint(0, 11) % 2
         if extra_flag == 0:
-            extra_ovl_file, extra_lab_file = files_list[np.random.randint(25000, 31250), :] # 2nd image is guaranteed StegaStamp with augmentation
+            extra_ovl_file, extra_lab_file = files_list[np.random.randint(0, 25000), :]
             extra_overlay = Image.open(extra_ovl_file).convert('RGBA')
             extra_label = Image.open(extra_lab_file).convert('RGBA')
-        
+
+        # Random chance for a 2nd or 3rd image
         extra_extra_flag = random.choice([extra_flag, 0])
         if extra_extra_flag == 0:
-            extra_extra_ovl_file, extra_extra_lab_file = files_list[np.random.randint(12500, 25000), :] # 3rd image is guaranteed Normal image
+            extra_extra_ovl_file, extra_extra_lab_file = files_list[np.random.randint(0, 25000), :]
             extra_extra_overlay = Image.open(extra_extra_ovl_file).convert('RGBA')
             extra_extra_label = Image.open(extra_extra_lab_file).convert('RGBA')
 

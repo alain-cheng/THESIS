@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 
 images_dir = "../assets/synthesized/*.jpg"
-labels_dir = "../assets/synthesized/labels/*.jpg"
+labels_dir = "../assets/synthesized/labels/*.png"
 
 dataset_dir = "../assets/StegaStampV1"
 train_dir = '../assets/StegaStampV1/train'
