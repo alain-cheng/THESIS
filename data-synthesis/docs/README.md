@@ -22,6 +22,9 @@ After running the full project, you should see the dataset in this directory: `.
 
         https://github.com/alain-cheng/Semantic-Segmentation-Suite/tree/master
 
+### How to use
+1. Run `python main.py`
+
 ## Datasets Used
 
 This process uses two different datasets:

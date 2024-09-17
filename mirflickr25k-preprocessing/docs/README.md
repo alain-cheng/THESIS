@@ -15,6 +15,10 @@ Figure shows a sample of the expected output images. The difference is hard to n
 
 After running, you should expect to see the processed images in `./assets/stegastamp-encoded`.
 
+### How to use
+1. Run `python split.py`
+2. Run `python automate.py`
+
 ## Dataset
 
 The MirFlickr dataset used in this project can be obtained from the following download [link](http://press.liacs.nl/mirflickr/mirflickr25k.v3b/mirflickr25k.zip):

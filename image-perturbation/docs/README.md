@@ -16,6 +16,9 @@ A sample image of the expected output is shown.
 
 After running, processed images are saved in `./assets/perturbed`.
 
+### How to use
+1. Run `python main.py`
+
 ## Setup
 
 ### Dataset
