@@ -7,7 +7,7 @@ from annotate import annotate       # type: ignore
 import os
 
 
-def rescale_image(image=None, images_dir=None, save_dir=None, size=(400,400), limit=None):
+def rescale_image(image=None, images_dir=None, save_dir=None, label_save_dir=None, size=(400,400), limit=None):
     
     if image is not None:
         files_list = [image]
@@ -24,17 +24,18 @@ def rescale_image(image=None, images_dir=None, save_dir=None, size=(400,400), li
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
         for filename in files_list:
-            image = Image.open(filename).convert("RGB")
+            image = Image.open(filename).convert('RGB')
             image = np.array(ImageOps.fit(image,size),dtype=np.float32)
             image /= 255.
-            save_name = filename.split('/')[-1].split('.')[0]
+            save_name = 'im' + str(int(filename.split('/')[-1].split('.')[0].split('m')[-1]) + 12500)
+            #print(save_name)
 
             # Annotation RGB
             # StegaStamp (192, 0, 64)
             # Normal (64, 192, 128)
-            annotate(color=(64, 192, 128), size=size, save_name=save_name, save_dir='../assets/stegastamp-encoded/labels')
+            annotate(color=(64, 192, 128), size=size, save_name=save_name, save_dir=label_save_dir)
 
-            plt.imsave(save_dir + '/' + save_name + '.jpg', image)
-            print("Created " + save_dir + '/' + save_name + '.jpg')
+            plt.imsave(save_dir + '/' + save_name + '.png', image)
+            print("Created " + save_dir + '/' + save_name + '.png')
 
-    print("Rescale Finished")
+        print("Rescale Finished")

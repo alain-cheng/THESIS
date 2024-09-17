@@ -7,11 +7,13 @@ The project has been run strictly using **Python 3.7.16** & **Tensorflow 1.13.1*
 
 ## Description
 
-This project directory encodes and/or resizes images from the MirFlickr dataset via StegaStamp encoding in preparation for image augmentation through the `../image-augmentation` project directory.
+This project directory encodes and/or resizes images from the MirFlickr dataset via StegaStamp.
 
-### Examples
+![encoded](/docs/Images/encoded.jpg)
 
-![alt-text-01](/docs/Images/encoded.png)
+Figure shows a sample of the expected output images. The difference is hard to notice.
+
+After running, you should expect to see the processed images in `./assets/stegastamp-encoded`.
 
 ## Dataset
 

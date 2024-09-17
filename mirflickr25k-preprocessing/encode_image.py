@@ -20,14 +20,14 @@ BCH_BITS = 5
 This function was taken from StegaStamp's encode_image.py and modified for 
 the purpose of dataset preprocessing.
 '''
-def encode_image(model, image=None, images_dir=None, save_dir=None, secret='1234567', limit=None):
+def encode_image(model, image=None, images_dir=None, save_dir=None, label_save_dir=None, secret='1234567', limit=None):
 
     # Edits: Removed all instances of args + Converted encode_image.py to a function
 
     if image is not None:
         files_list = [image]
     elif images_dir is not None:
-        files_list = natsorted(glob(os.path.join(images_dir, '*.jpg'))) # edits
+        files_list = natsorted(glob(os.path.join(images_dir, '*'))) # edits
         files_list = [path.replace('\\', '/') for path in files_list]   # edits
         if limit is not None:
             files_list = files_list[limit[0]:limit[1]]
@@ -78,7 +78,7 @@ def encode_image(model, image=None, images_dir=None, save_dir=None, secret='1234
             secret = [int(x) for x in packet_binary]
             secret.extend([0,0,0,0])
 
-            image = Image.open(filename).convert("RGB")
+            image = Image.open(filename).convert('RGB')
             image = np.array(ImageOps.fit(image,size),dtype=np.float32)
             image /= 255.
 
@@ -94,13 +94,13 @@ def encode_image(model, image=None, images_dir=None, save_dir=None, secret='1234
 
             save_name = filename.split('/')[-1].split('.')[0]
             im = Image.fromarray(np.array(rescaled))
-            im.save(save_dir + '/' + save_name + '.jpg') # edits
-            print("Created " + save_dir + '/' + save_name + '.jpg') # edits
+            im.save(save_dir + '/' + save_name + '.png') # edits
+            print("Created " + save_dir + '/' + save_name + '.png') # edits
 
             # Annotation RGB
             # StegaStamp (192, 0, 64)
             # Normal (64, 192, 128)
-            annotate(color=(192, 0, 64), size=size, save_name=save_name, save_dir='../assets/stegastamp-encoded/labels')
+            annotate(color=(192, 0, 64), size=size, save_name=save_name, save_dir=label_save_dir) #
 
             #im = Image.fromarray(np.squeeze(np.array(residual)))
             #im.save(save_dir + '/residuals'+'/'+save_name+'.png') # edits

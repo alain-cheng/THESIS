@@ -8,44 +8,17 @@ This project directory transforms the encoded images from the MIRFLICKR Dataset 
 - Gaussian Noise
 - JPEG Compression
 
-Each method is implemented with an internal random variable to ensure data variation.
+Each method is implemented with an internal random variable to ensure variation.
 
-### Examples
+![perturbed](/docs/Images/perturbed.jpg)
 
-![alt-text-01](/docs/Images/transformed.png)
+A sample image of the expected output is shown.
 
-![alt-text-02](/docs/Images/noised.png)
+After running, processed images are saved in `./assets/perturbed`.
 
 ## Setup
 
 ### Dataset
 
-This project dir assumes that `../mirflickr25k-preprocessing` has been executed. The following dataset folder structure on the root directory is expected before running this project: 
+This project dir assumes that `../mirflickr25k-preprocessing` has been executed.
 
-    ├── assets
-        ├── stegastamp-encoded
-            ├── <all unfoldered imgs in .jpg>
-            ├── labels
-                ├── <all unfoldered labels>
-
-*Arrangement is performed manually*
-
-### Script
-
-1. Start the venv environment
-
-```sh
-source  env/bin/activate
-```
-
-2. Install python dependencies
-
-```sh
-pip install -r requirements. txt
-```
-
-3. Run the transformations
-
-```sh
-python main.py
-```
