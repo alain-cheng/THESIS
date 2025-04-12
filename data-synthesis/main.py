@@ -7,23 +7,22 @@ from natsort import natsorted
 import os
 import random
 
-
 backgrounds_dir = '../assets/DIV2K_train_HR'
 
 dataset_dir = '../assets/perturbed'
 train_dir = '../assets/perturbed/train'
-train_labels_dir = '../assets/perturbed/train/labels'
+train_labels_dir = '../assets/perturbed/train_labels'
 test_dir = '../assets/perturbed/test'
-test_labels_dir = '../assets/perturbed/test/labels'
+test_labels_dir = '../assets/perturbed/test_labels'
 val_dir = '../assets/perturbed/val'
-val_labels_dir = '../assets/perturbed/val/labels'
+val_labels_dir = '../assets/perturbed/val_labels'
 
 train_save_dir = '../assets/synthesized/train'
-train_labels_save_dir = '../assets/synthesized/train/labels'
+train_labels_save_dir = '../assets/synthesized/train_labels'
 test_save_dir = '../assets/synthesized/test'
-test_labels_save_dir = '../assets/synthesized/test/labels'
+test_labels_save_dir = '../assets/synthesized/test_labels'
 val_save_dir = '../assets/synthesized/val'
-val_labels_save_dir = '../assets/synthesized/val/labels'
+val_labels_save_dir = '../assets/synthesized/val_labels'
 
 save_dirs = {
     train_save_dir: train_labels_save_dir,
@@ -33,9 +32,8 @@ save_dirs = {
 
 class_dict_data = [
     ["name", "r", "g", "b"],
-    ["StegaStamp", 192, 0, 64],
-    ["Normal", 64, 192, 128],
-    ["Unlabelled", 0, 0, 0]
+    ["Embedded", 255, 255, 255],
+    ["Background", 0, 0, 0]
 ]
 
 def synthesize(backgrounds_dir, overlays_dir, labels_dir, im_save_dir, lab_save_dir):
@@ -50,86 +48,53 @@ def synthesize(backgrounds_dir, overlays_dir, labels_dir, im_save_dir, lab_save_
 
         ## Open images
         bg = Image.open(bg_file)
-        bg = bg.resize((1000, 1000), Image.Resampling.LANCZOS)
+        bg = bg.resize((800, 800), Image.Resampling.LANCZOS)
         bg_width, bg_height = bg.size
         overlay = Image.open(ovl_file).convert('RGBA')
         bg_black = Image.new('RGB', (bg_width, bg_height), (0, 0, 0))       # black bg is for label overlaying
         label = Image.open(lab_file).convert('RGBA')
 
-        # Random chance of a 2nd image
-        extra_flag = np.random.randint(0, 11) % 2
-        if extra_flag == 0:
-            extra_ovl_file, extra_lab_file = files_list[np.random.randint(0, len(files_list)), :]
-            extra_overlay = Image.open(extra_ovl_file).convert('RGBA')
-            extra_label = Image.open(extra_lab_file).convert('RGBA')
-
-        # Random chance for a 2nd or 3rd image
-        extra_extra_flag = random.choice([extra_flag, 0])
-        if extra_extra_flag == 0:
-            extra_extra_ovl_file, extra_extra_lab_file = files_list[np.random.randint(0, len(files_list)), :]
-            extra_extra_overlay = Image.open(extra_extra_ovl_file).convert('RGBA')
-            extra_extra_label = Image.open(extra_extra_lab_file).convert('RGBA')
-
-# Add augmentations to the images
+# Augmentations
         # Rotation
-        randfloat = random.uniform(-3.0, 3.0)
+        #randfloat = random.uniform(-3.0, 3.0)
         randfloat2 = random.uniform(-360, 360)
-        r = np.random.randint(0, 255)
-        g = np.random.randint(0, 255)
-        b = np.random.randint(0, 255)
-        bg = bg.rotate(randfloat, Image.Resampling.NEAREST, expand = False, fillcolor=(r,g,b)) # expand false so output img dimension is not affected
         overlay = overlay.rotate(randfloat2, expand = True)
-        bg_black = bg_black.rotate(randfloat, expand = False)
+        #bg_black = bg_black.rotate(randfloat, expand = False)
         label = label.rotate(randfloat2, expand = True)
-        
-        if extra_flag == 0:
-            randfloat2 = random.uniform(-360, 360)
-            extra_overlay = extra_overlay.rotate(randfloat2, expand = True)
-            extra_label = extra_label.rotate(randfloat2, expand = True) 
-
-        if extra_extra_flag == 0:
-             randfloat2 = random.uniform(-360, 360)
-             extra_extra_overlay = extra_extra_overlay.rotate(randfloat2, expand = True)
-             extra_extra_label = extra_extra_label.rotate(randfloat2, expand = True) 
 
         # Brightness
-        bg = ImageEnhance.Brightness(bg).enhance(random.uniform(0.5, 1.5))  
+        # bg = ImageEnhance.Brightness(bg).enhance(random.uniform(0.5, 1.5))  
 
-# Generate a random coordinate on the bg
+# Compute a random coordinate on the bg
         rand_x = np.random.randint(0, bg_width+1-400)                       # Subtracting ~400 so the encoding doesnt go out-of-frame
         rand_y = np.random.randint(0, bg_height+1-400)
         randint = (rand_x, rand_y)
 
-# Overlay mirflickr images onto div2k
+# Generate random color RGBA square
+        rand_rgba = (
+            random.randint(0, 255),
+            random.randint(0, 255),
+            random.randint(0, 255),
+            random.randint(0, 255)
+        )
+        sq_rgb = Image.new("RGBA", (800,800), rand_rgba)
+
+# Overlay
+        bg.paste(sq_rgb, (0,0), mask=sq_rgb)
         bg.paste(overlay, randint, mask=overlay)
         bg_black.paste(label, randint, mask=label)
 
-        # Extra images
-        if extra_flag == 0:
-            rand_x = np.random.randint(0, bg_width+1-400)
-            rand_y = np.random.randint(0, bg_height+1-400)
-            randint = (rand_x, rand_y)
-            bg.paste(extra_overlay, randint, mask=extra_overlay)
-            bg_black.paste(extra_label, randint, mask=extra_label)
-        
-        if extra_extra_flag == 0:
-            rand_x = np.random.randint(0, bg_width+1-400)
-            rand_y = np.random.randint(0, bg_height+1-400)
-            randint = (rand_x, rand_y)
-            bg.paste(extra_extra_overlay, randint, mask=extra_extra_overlay)
-            bg_black.paste(extra_extra_label, randint, mask=extra_extra_label)
-
         im_save_name = ovl_file.split('/')[-1].split('.')[0].split('im')[-1]
-        lab_save_name = lab_file.split('/')[-1].split('.')[0].split('im')[-1].split('_')[0]
+        lab_save_name = lab_file.split('/')[-1].split('.')[0].split('im')[-1]
         im_save_name = 'im' + f'{int(im_save_name)}'
-        lab_save_name = 'im' + f'{int(lab_save_name)}' + '_L'
+        lab_save_name = 'im' + f'{int(lab_save_name)}'
 
         # Sharpen
         bg_black = bg_black.filter(ImageFilter.SHARPEN)
         
         # Resize all outputs
-        bg = bg.resize((800, 800), Image.Resampling.LANCZOS)
-        bg_black = bg_black.resize((800, 800), Image.Resampling.LANCZOS)
+        bg = bg.resize((512, 512), Image.Resampling.LANCZOS)
+        bg_black = bg_black.resize((512, 512), Image.Resampling.LANCZOS)
 
 # Save overlayed images
         bg.save(im_save_dir + '/' + im_save_name + '.png')

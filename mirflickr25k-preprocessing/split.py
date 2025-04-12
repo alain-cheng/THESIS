@@ -8,9 +8,9 @@ import shutil
 from sklearn.model_selection import train_test_split
 
 
-images_dir = '../assets/mirflickr25k/mirflickr'
-    # Do the following command after unzipping for the first time before running:
-    # find . -type f ! -name '*.jpg' -delete
+images_dir = '../assets/mirflickr'
+    # Do the command below after unzipping the downloaded mirflickr dataset for the first time before running the code:
+        # find . -type f ! -name '*.jpg' -delete
 
 dataset_dir = '../assets/MirFlickr'
 train_dir = '../assets/MirFlickr/train'
@@ -19,8 +19,9 @@ val_dir = '../assets/MirFlickr/val'
 
 def main():
     im_files = natsorted(glob(os.path.join(images_dir, '*')))
-    im_files = im_files[0:12500]
+    im_files = im_files[0:7250]
 
+    # Partition to 70-15-15
     train, test_val = train_test_split(im_files, train_size=0.7, test_size=0.3, random_state=42, shuffle=True)
     test, val = train_test_split(test_val, train_size=0.5, test_size=0.5)
     
