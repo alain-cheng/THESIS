@@ -1,0 +1,7 @@
+opencv-python
+scikit-learn
+scipy
+protobuf==3.19.6
+matplotlib
+bchlib==0.10
+natsort
